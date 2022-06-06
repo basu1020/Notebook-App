@@ -15,14 +15,10 @@ const AuthState = (props) => {
             headers: {
                 'Content-type': 'application/json'
             },
-            body: {
-                "email": email.toString(),
-                "password": passowrd
-            }
+            body: JSON.stringify({"email": email, "password": passowrd})
         })
         const json = await response.json()
-        console.log(json)
-
+        setauthToken(json.authToken)
     }
 
     return (

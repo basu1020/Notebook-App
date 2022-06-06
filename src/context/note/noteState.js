@@ -5,7 +5,7 @@ const NoteState = (props) => {
     const host = 'http://localhost:5000'
     const intitalState = []
     const [note, setNote] = useState(intitalState)
-    const [authToken,setauthToken] = useState('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjI5YjNiN2UxZTNiZDk1NjBkY2JmY2E2In0sImlhdCI6MTY1NDQwNDcxNn0.afiHxxXhnegTVjqMaVtvGQiAFjdIlrGqrP0VNCJkb2I')
+    const [authToken,setauthToken] = useState(null)
 
     const fetchAllNotes =  async ()=>{
 
@@ -31,13 +31,12 @@ const NoteState = (props) => {
                 'Content-Type':'application/json',
                 'auth-token': authToken
             },
-            body: JSON.stringify({title, description, tag})
+            body: JSON.stringify({title, description, tag})  
         })
         const json = await response.json()
         setNote(note.concat(json.notes))
     }
 
-    //
     const deleteNote = async (id)=>{
         const response = await fetch(`${host}/api/notes/deleteNote/${id}`,{
             method: 'DELETE',

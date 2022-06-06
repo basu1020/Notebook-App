@@ -8,7 +8,6 @@ const secret = "thisismySecret"
 const fetchuser = require('../middleware/fetchuser')
 
 // ROUTE 1 : Create a User using: POST "/api/auth/createUser". No login required.
-
 router.post('/createUser', [
     body('name').isLength({ min: 5 }),
     body('email').isEmail(),
@@ -17,6 +16,7 @@ router.post('/createUser', [
 
     try {
         //we are checking for valiations, if there are errors we are returning Bad request and the errors.
+        console.log(body.email, body.password)
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
             return res.status(400).json({ errors: errors.array() });
@@ -71,11 +71,12 @@ router.post('/login', [
         //finding user through database
 
         let user = await User.findOne({ email })
+
         if (!user) {
             return res.status(400).json({ error: "Please Login with correct credentials" })
         }
 
-        //Comparing the password.
+        //Comparing the password. 
 
         const passwordCompare = await bcrypt.compare(password, user.password)
 
