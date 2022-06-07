@@ -18,14 +18,29 @@ const AuthState = (props) => {
             body: JSON.stringify({"email": email, "password": passowrd})
         })
         const json = await response.json()
+        return json
+    }
+
+    const createUser = async (name, email, password) => {
+
+        const response = await fetch(`${host}/api/auth/createUser`,{
+            method: "POST",
+            headers: {
+                'Content-type': 'application/json'
+            },
+            body: JSON.stringify({"name": name, "email":email, "password":password})
+        })
+        const json = await response.json()
         setauthToken(json.authToken)
     }
 
     return (
-        <AuthContext.Provider value={{ loggedIN, setLoggedIN, login }}>
+        <AuthContext.Provider value={{ loggedIN, setLoggedIN, login, createUser }}>
             {props.children}
         </AuthContext.Provider>
     )
+
+    
 }
 
 export default AuthState

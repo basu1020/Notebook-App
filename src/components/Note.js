@@ -26,11 +26,11 @@ const Note = () => {
     const etitle = document.getElementById('etitle').value
     const edescription = document.getElementById('edescription').value
     const etag = document.getElementById('etag').value
-    if(etitle && edescription){
+    if (etitle && edescription) {
       await editNote(id, etitle, edescription, etag)
       fetchAllNotes()
     }
-    else{
+    else {
       alert("Title and Description can't be empty")
     }
   }
@@ -85,15 +85,17 @@ const Note = () => {
 
       {/* Notes are here */}
       <h2 className='my-3'>Your notes</h2>
-      <div className="row my-3">
-        {note.map((note) => {
-          return <NoteItems key={note._id} updateNote={updateNote} note={note} />
-        })}
+      <div className="container-custom">
+        <div className="content-cutom">
+          {note.map((note) => {
+            return <NoteItems key={note._id} updateNote={updateNote} note={note} />
+          })}
+        </div>
       </div>
     </>
   )
 }
 
-export default Note 
+export default Note
 
 // we used javascript spread operator in line 33. 

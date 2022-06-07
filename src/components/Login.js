@@ -1,37 +1,51 @@
-import React,{useContext} from 'react'
+import React, { useContext } from 'react'
 import authContext from '../context/auth/authContext'
+import noteContext from '../context/note/noteContext'
 
 const Login = () => {
     const context = useContext(authContext)
     const { login, setLoggedIN } = context
+    const noteContextt = useContext(noteContext)
+    const { setauthToken } = noteContextt
 
     const handleClick = async (e) => {
         e.preventDefault()
         const inputEmail = document.querySelector('#inputEmail')
         const inputPassword = document.querySelector('#inputPassword')
-        await login(inputEmail.value,inputPassword.value)
-        setLoggedIN(true)
+        try {
+            const json = await login(inputEmail.value, inputPassword.value)
+            if(json.authToken){
+                setauthToken(json.authToken)
+                setLoggedIN(true)
+            }
+            else{
+                alert(json.error)
+            }
+        } catch (error) {
+            alert(error)
+        }
     }
 
     return (
         <>
-        <div className='container my-3'>
-            <form>
-                <div className="row mb-3">
-                    <label htmlFor="inputEmail3" className="col-sm-2 col-form-label"> Email </label>
-                    <div className="col-sm-10">
-                        <input type="email" className="form-control" id="inputEmail"/>
+            <div className='container my-3'>
+                <h3> Login </h3>
+                <form>
+                    <div className="row mb-3">
+                        <label htmlFor="inputEmail3" className="col-sm-2 col-form-label"> Email </label>
+                        <div className="col-sm-10">
+                            <input type="email" className="form-control" id="inputEmail" />
+                        </div>
                     </div>
-                </div>
-                <div className="row mb-3">
-                    <label htmlFor="inputPassword3" className="col-sm-2 col-form-label"> Password </label>
-                    <div className="col-sm-10">
-                        <input type="password" className="form-control" id="inputPassword"/>
+                    <div className="row mb-3">
+                        <label htmlFor="inputPassword3" className="col-sm-2 col-form-label"> Password </label>
+                        <div className="col-sm-10">
+                            <input type="password" className="form-control" id="inputPassword" />
+                        </div>
                     </div>
-                </div>
-                <button className="btn btn-primary" onClick={handleClick}> Log in </button>
-            </form>
-        </div>
+                    <button className="btn btn-primary" onClick={handleClick}> Log in </button>
+                </form>
+            </div>
         </>
     )
 }

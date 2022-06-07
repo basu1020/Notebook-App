@@ -1,4 +1,4 @@
-import React,{useContext} from 'react'
+import React, { useContext, useEffect } from 'react'
 import Login from './Login'
 import Note from './Note'
 import authContext from '../context/auth/authContext'
@@ -8,8 +8,8 @@ const Home = () => {
   const { loggedIN } = context
   return (
     <>
-      {!loggedIN && <Login/>}
-      {loggedIN && <Note/>}
+      {!loggedIN && <Login />}
+      {loggedIN && <Note />}
     </>
   )
 }

@@ -1,4 +1,4 @@
-import React, { useEffect,useContext } from 'react'
+import React, { useEffect, useContext } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import authContext from '../context/auth/authContext'
 import noteContext from '../context/note/noteContext'
@@ -14,19 +14,22 @@ const Navbar = () => {
   }, [location])
 
   const handleClick = () => {
-    setLoggedIN(false)
-    setauthToken(null)
+    let confirmation = window.confirm("Are you sure you want to Sign Out?")
+    if (confirmation) {
+      setLoggedIN(false)
+      setauthToken(null)
+    }
   }
 
   return (
     <>
       <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
         <div className="container-fluid">
-          <Link className="navbar-brand" to="/">iNotebook</Link>
+          <Link className="navbar-brand" to="/">Notebook</Link>
           <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span className="navbar-toggler-icon"></span>
           </button>
-          <div className="collapse navbar-collapse" id="navbarNav" style={{justifyContent: "space-between"}}>
+          <div className="collapse navbar-collapse" id="navbarNav" style={{ justifyContent: "space-between" }}>
             <div>
               <ul className="navbar-nav">
                 <li className="nav-item">
@@ -37,16 +40,25 @@ const Navbar = () => {
                 </li>
               </ul>
             </div>
+
+            {!loggedIN &&
+              <ul className='navbar-nav'>
+                <li className='nav-item' style={{ color: "white"}}>New User?
+                  <Link to="/signup">
+                    <button className='btn-primary btn mx-2'> Signup </button>
+                  </Link>
+                </li>
+              </ul>
+            }
+
             {loggedIN &&
-            <div>
-              <div className="collapse navbar-collapse">
+              <div>
                 <ul className="navbar-nav">
                   <li className="nav-item">
                     <button className='btn-primary btn' onClick={handleClick}>Signout</button>
                   </li>
                 </ul>
               </div>
-            </div>
             }
           </div>
         </div>
