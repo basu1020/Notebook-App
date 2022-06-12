@@ -2,12 +2,16 @@ import React, { useContext, useEffect, useRef, useState } from 'react'
 import noteContext from '../context/note/noteContext'
 import NoteItems from './NoteItems'
 import AddNote from './AddNote'
+import authContext from '../context/auth/authContext'
 
 const Note = () => {
-  const context = useContext(noteContext)
-  const { note, fetchAllNotes, editNote } = context
-  const [notes, setNotes] = useState({ title: "", description: "", tag: "" })
+  const note_Context = useContext(noteContext)
+  const { note, fetchAllNotes, editNote } = note_Context
+  const auth_Context = useContext(authContext)
+  const { loggedIN } = auth_Context
+  const [notes, setNotes] = useState({id: "", title: "", description: "", tag: "" })
   const ref = useRef(null)
+  const closeRef = useRef(null)
 
   useEffect(() => {
     fetchAllNotes()
@@ -21,18 +25,9 @@ const Note = () => {
     console.log(notes)
   }
 
-  const handleClick = async () => {
-    const id = notes._id
-    const etitle = document.getElementById('etitle').value
-    const edescription = document.getElementById('edescription').value
-    const etag = document.getElementById('etag').value
-    if (etitle && edescription) {
-      await editNote(id, etitle, edescription, etag)
-      fetchAllNotes()
-    }
-    else {
-      alert("Title and Description can't be empty")
-    }
+  const handleClick = async () => {   
+    await editNote(notes._id, notes.title, notes.description, notes.tag)
+    closeRef.current.click()
   }
 
   const onChange = (e) => {
@@ -62,22 +57,22 @@ const Note = () => {
               <form>
                 <div className="mb-3">
                   <label htmlFor="etitle" className="form-label">Title</label>
-                  <input type="text" className="form-control" value={note.title} id="etitle" name="etitle" onChange={onChange} />
+                  <input type="text" className="form-control" value={note.title} id="etitle" name="title" onChange={onChange} />
                 </div>
                 <div className="mb-3">
                   <label htmlFor="edescription" className="form-label">Description</label>
-                  <input type="text" className="form-control" name="edescription" id="edescription" value={note.description} onChange={onChange} />
+                  <input type="text" className="form-control" name="description" id="edescription" value={note.description} onChange={onChange} />
                 </div>
                 <div className="mb-3">
                   <label htmlFor="etag" className="form-label">Tag</label>
-                  <input type="text" className="form-control" name="etag" id="etag" value={note.tag} onChange={onChange} />
+                  <input type="text" className="form-control" name="tag" id="etag" value={note.tag} onChange={onChange} />
                 </div>
               </form>
 
             </div>
             <div className="modal-footer">
-              <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-              <button type="button" className="btn btn-primary" onClick={handleClick}>Update Note</button>
+              <button type="button" ref={closeRef} className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <button type="button" className="btn btn-primary" onClick={handleClick} disabled={notes.title.length < 5 || notes.description.length < 5}>Update Note</button>
             </div>
           </div>
         </div>

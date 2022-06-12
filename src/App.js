@@ -11,6 +11,8 @@ import About from './components/About';
 import NoteState from './context/note/noteState';
 import AuthState from './context/auth/authState';
 import SignUp from './components/SignUp';
+import Note from './components/Note';
+
 
 function App() {
   return (
@@ -24,6 +26,7 @@ function App() {
               <Route exact path="/" element={<Home />}></Route>
               <Route exact path="/about" element={<About />}></Route>
               <Route exact path="/signup" element={<SignUp/>}></Route>
+              <Route exact path="/user" element={<Note/>}></Route>
             </Routes>
             </div>
           </Router>

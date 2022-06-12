@@ -1,16 +1,24 @@
 import React,{ useContext } from 'react'
+import { useNavigate } from 'react-router-dom'
 import authContext from '../context/auth/authContext'
 
 const SignUp = () => {
     const context = useContext(authContext)
-    const { setLoggedIN, createUser } = context
+    const { createUser } = context
+    const navigate = useNavigate()
 
-    const handleClick = async () => {
+    const handleClick = async (e) => {
+        e.preventDefault()
         const Supname = document.getElementById('SupName')
         const Supemail = document.getElementById('SupEmail')
         const SupPassword = document.getElementById('SupPassword')
-        await createUser(Supname.value, Supemail.value, SupPassword.value)
-        setLoggedIN(true)
+        const response = await createUser(Supname.value, Supemail.value, SupPassword.value)
+        if(response.authToken){
+            navigate("/")
+        }
+        else{
+            alert(response.error)
+        }
     }
 
     return (

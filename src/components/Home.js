@@ -9,7 +9,6 @@ const Home = () => {
   return (
     <>
       {!loggedIN && <Login />}
-      {loggedIN && <Note />}
     </>
   )
 }

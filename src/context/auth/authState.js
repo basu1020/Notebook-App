@@ -31,7 +31,8 @@ const AuthState = (props) => {
             body: JSON.stringify({"name": name, "email":email, "password":password})
         })
         const json = await response.json()
-        setauthToken(json.authToken)
+        console.log(json)
+        return json
     }
 
     return (
@@ -39,7 +40,6 @@ const AuthState = (props) => {
             {props.children}
         </AuthContext.Provider>
     )
-
     
 }
 

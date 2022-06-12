@@ -8,7 +8,7 @@ const NoteState = (props) => {
     const [authToken,setauthToken] = useState(null)
 
     const fetchAllNotes =  async ()=>{
-
+        
         //TODO API CALL
         const response = await fetch(`${host}/api/notes/fetchAllNotes`,{
             method: 'GET',
@@ -69,14 +69,17 @@ const NoteState = (props) => {
         console.log(json)
 
         // Logic to show changes to client.
-        for (let index = 0; index < note.length; index++) {
-            const element = note[index];
+        let newNote = JSON.parse(JSON.stringify(note))
+        for (let index = 0; index < newNote.length; index++) {
+            const element = newNote[index];
             if(element._id === id){
-                element.title = title
-                element.description = description
-                element.tag = tag
+                newNote[index].title = title
+                newNote[index].description = description
+                newNote[index].tag = tag
+                break
             }
         }
+        setNote(newNote)
     }
 
     return (

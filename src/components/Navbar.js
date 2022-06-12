@@ -1,5 +1,5 @@
 import React, { useEffect, useContext } from 'react'
-import { Link, useLocation } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 import authContext from '../context/auth/authContext'
 import noteContext from '../context/note/noteContext'
 
@@ -9,6 +9,7 @@ const Navbar = () => {
   const { setauthToken } = notecontext
   const authcontext = useContext(authContext)
   const { loggedIN, setLoggedIN } = authcontext
+  const navigate = useNavigate()
 
   useEffect(() => {
   }, [location])
@@ -18,6 +19,7 @@ const Navbar = () => {
     if (confirmation) {
       setLoggedIN(false)
       setauthToken(null)
+      navigate("/")
     }
   }
 
@@ -32,9 +34,18 @@ const Navbar = () => {
           <div className="collapse navbar-collapse" id="navbarNav" style={{ justifyContent: "space-between" }}>
             <div>
               <ul className="navbar-nav">
-                <li className="nav-item">
-                  <Link className={`nav-link ${location.pathname === "/" ? "active" : ""}`} aria-current="page" to="/">Home</Link>
-                </li>
+                {
+                  !loggedIN &&
+                  <li className="nav-item">
+                    <Link className={`nav-link ${location.pathname === "/" ? "active" : ""}`} aria-current="page" to="/">Login</Link>
+                  </li>
+                }
+
+                {
+                  loggedIN && <li className="nav-item">
+                    <Link className={`nav-link ${location.pathname === "/" ? "active" : ""}`} aria-current="page" disabled={true} to="/user">Home</Link>
+                  </li>
+                }
                 <li className="nav-item">
                   <Link className={`nav-link ${location.pathname === "/about" ? "active" : ""}`} to="/about">About</Link>
                 </li>
@@ -43,7 +54,7 @@ const Navbar = () => {
 
             {!loggedIN &&
               <ul className='navbar-nav'>
-                <li className='nav-item' style={{ color: "white"}}>New User?
+                <li className='nav-item' style={{ color: "white" }}>New User?
                   <Link to="/signup">
                     <button className='btn-primary btn mx-2'> Signup </button>
                   </Link>
