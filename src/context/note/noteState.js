@@ -5,20 +5,22 @@ const NoteState = (props) => {
     const host = 'http://localhost:5000'
     const intitalState = []
     const [note, setNote] = useState(intitalState)
-    const [authToken,setauthToken] = useState(null)
 
     const fetchAllNotes =  async ()=>{
         
+        console.log(localStorage.getItem("token"))
+
         //TODO API CALL
         const response = await fetch(`${host}/api/notes/fetchAllNotes`,{
             method: 'GET',
             headers: {
                 'Content-Type':'application/json',
-                'auth-token': authToken
+                'auth-token': localStorage.getItem("token")
             },
         })
         const json = await response.json()
         setNote(json.notes)
+        console.log(json)
     }
 
     // Add a Note
@@ -29,7 +31,7 @@ const NoteState = (props) => {
             method: 'POST',
             headers: {
                 'Content-Type':'application/json',
-                'auth-token': authToken
+                'auth-token': `${localStorage.getItem("token")}`
             },
             body: JSON.stringify({title, description, tag})  
         })
@@ -42,7 +44,7 @@ const NoteState = (props) => {
             method: 'DELETE',
             headers: {
                 'Content-Type':'application/json',
-                'auth-token': authToken
+                'auth-token': localStorage.getItem("token")
             },
         })
         const json = response.json()
@@ -61,7 +63,7 @@ const NoteState = (props) => {
             method: 'PUT',
             headers: {
                 'Content-Type':'application/json',
-                'auth-token': authToken
+                'auth-token': localStorage.getItem("token")
             },
             body: JSON.stringify({title,description,tag})
         })
@@ -83,7 +85,7 @@ const NoteState = (props) => {
     }
 
     return (
-        <NoteContext.Provider value={{ note, authToken, setauthToken, fetchAllNotes, setNote, addNote, deleteNote, editNote }}> 
+        <NoteContext.Provider value={{ note, fetchAllNotes, setNote, addNote, deleteNote, editNote }}> 
             {props.children}
         </NoteContext.Provider>
     )

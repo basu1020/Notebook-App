@@ -1,14 +1,11 @@
 import React, { useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
 import authContext from '../context/auth/authContext'
-import noteContext from '../context/note/noteContext'
 
 const Login = () => {
     const context = useContext(authContext)
     const { login, setLoggedIN } = context
-    const noteContextt = useContext(noteContext)
-    const { authToken, setauthToken } = noteContextt
-    let history = useNavigate()
+    let navigate = useNavigate()
 
     const handleClick = async (e) => {
         e.preventDefault()
@@ -17,12 +14,9 @@ const Login = () => {
         try {
             const json = await login(inputEmail.value, inputPassword.value)
             if(json){
-                console.log(json)
-                await setauthToken(json.authToken)
                 await setLoggedIN(true)
-                localStorage.setItem('token', json.authToken)
-                history("/user")
-                // window.location.href = "http://localhost:3000/user"
+                localStorage.setItem("token", json.authToken)
+                navigate("/user")
             }
             else{
                 alert("error")

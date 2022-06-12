@@ -5,10 +5,8 @@ import noteContext from '../context/note/noteContext'
 
 const Navbar = () => {
   const location = useLocation()
-  const notecontext = useContext(noteContext)
-  const { setauthToken } = notecontext
   const authcontext = useContext(authContext)
-  const { loggedIN, setLoggedIN } = authcontext
+  const {setLoggedIN } = authcontext
   const navigate = useNavigate()
 
   useEffect(() => {
@@ -18,7 +16,7 @@ const Navbar = () => {
     let confirmation = window.confirm("Are you sure you want to Sign Out?")
     if (confirmation) {
       setLoggedIN(false)
-      setauthToken(null)
+      localStorage.removeItem("token")
       navigate("/")
     }
   }
@@ -35,14 +33,14 @@ const Navbar = () => {
             <div>
               <ul className="navbar-nav">
                 {
-                  !loggedIN &&
+                  !localStorage.getItem("token") &&
                   <li className="nav-item">
                     <Link className={`nav-link ${location.pathname === "/" ? "active" : ""}`} aria-current="page" to="/">Login</Link>
                   </li>
                 }
 
                 {
-                  loggedIN && <li className="nav-item">
+                  localStorage.getItem("token") && <li className="nav-item">
                     <Link className={`nav-link ${location.pathname === "/" ? "active" : ""}`} aria-current="page" disabled={true} to="/user">Home</Link>
                   </li>
                 }
@@ -52,7 +50,7 @@ const Navbar = () => {
               </ul>
             </div>
 
-            {!loggedIN &&
+            {!localStorage.getItem("token") &&
               <ul className='navbar-nav'>
                 <li className='nav-item' style={{ color: "white" }}>New User?
                   <Link to="/signup">
@@ -62,7 +60,7 @@ const Navbar = () => {
               </ul>
             }
 
-            {loggedIN &&
+            {localStorage.getItem("token") &&
               <div>
                 <ul className="navbar-nav">
                   <li className="nav-item">
