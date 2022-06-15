@@ -8,7 +8,7 @@ const NoteItems = (props) => {
 
     const handleDelete = () => {
         let confirmation = window.confirm("Are you sure you want to delete it? It will be deleted permanently ")
-        if(confirmation === true){
+        if(confirmation){
             deleteNote(note._id)
         }
     }

@@ -26,7 +26,7 @@ const Note = () => {
   const updateNote = async (currentNote) => {
     await ref.current.click()
     setNotes(currentNote)
-    console.log(notes)
+
   }
 
   const handleClick = async () => {   
@@ -61,15 +61,15 @@ const Note = () => {
               <form>
                 <div className="mb-3">
                   <label htmlFor="etitle" className="form-label">Title</label>
-                  <input type="text" className="form-control" value={note.title} id="etitle" name="title" onChange={onChange} />
+                  <input type="text" className="form-control" value={notes.title} id="etitle" name="title" onChange={onChange} />
                 </div>
                 <div className="mb-3">
                   <label htmlFor="edescription" className="form-label">Description</label>
-                  <input type="text" className="form-control" name="description" id="edescription" value={note.description} onChange={onChange} />
+                  <input type="text" className="form-control" name="description" id="edescription" value={notes.description} onChange={onChange} />
                 </div>
                 <div className="mb-3">
                   <label htmlFor="etag" className="form-label">Tag</label>
-                  <input type="text" className="form-control" name="tag" id="etag" value={note.tag} onChange={onChange} />
+                  <input type="text" className="form-control" name="tag" id="etag" value={notes.tag} onChange={onChange} />
                 </div>
               </form>
 
