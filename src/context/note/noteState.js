@@ -27,13 +27,14 @@ const NoteState = (props) => {
 
     const addNote =  async ( title, description, tag)=>{
         //TODO API CALL
+        const Tag = tag?tag:null
         const response = await fetch(`${host}/api/notes/addNote`,{
             method: 'POST',
             headers: {
                 'Content-Type':'application/json',
                 'auth-token': `${localStorage.getItem("token")}`
             },
-            body: JSON.stringify({title, description, tag})  
+            body: JSON.stringify({title, description, Tag})  
         })
         const json = await response.json()
         setNote(note.concat(json.notes))

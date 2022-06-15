@@ -29,6 +29,7 @@ const NoteItems = (props) => {
                 </div>
                 <div className="content-description">
                     <p>{note.description}</p>
+                    <p>{note.tag}</p>
                 </div>
             </div>
         </>
