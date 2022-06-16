@@ -102,7 +102,7 @@ const Note = () => {
       <div className="container-custom">
       <h2 className='my-3' style={{display: "flex",justifyContent: "space-between"}}>
         Notes
-        <i class="fa-solid fa-file-circle-plus" id="addNote-revealer" onClick={handleAddNote}></i>
+        <i className="fa-solid fa-file-circle-plus" id="addNote-revealer" onClick={handleAddNote}></i>
         </h2>
         <div className="content-custom">
           {note.map((note) => {

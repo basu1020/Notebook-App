@@ -17,9 +17,9 @@ const NoteItems = (props) => {
 
     return (
         <>
-            <div className="noteitem-custom-card">
+            <div className="noteitem-custom-card" style={{backgroundColor: note.tag.toLowerCase() === "important" ?"#eb6b34":"#16ac23"}}>
                 <div className="title-and-buttons">
-                    <b>{note.title}</b>
+                    <b style={{paddingLeft:"1%"}}>{note.title}</b>
                     <div className="buttons-delete-and-erase">
                         <i className="fa-solid fa-trash-can mx-2" onClick={() => { handleDelete() }}></i>
                         <i className="fa-solid fa-square-pen mx-2" onClick={() => {
@@ -29,8 +29,8 @@ const NoteItems = (props) => {
                 </div>
                 <div className="content-description">
                     <p>{note.description}</p>
-                    <p>{note.tag}</p>
                 </div>
+                    {/* <p style={{position:"relative", bottom:"15px"}}>{note.tag}</p> */}
             </div>
         </>
     )

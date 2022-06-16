@@ -40,11 +40,15 @@
   justify-content: center;
 }
 
+.content-description{
+  padding: 4% 1% 1%;
+}
+
 .noteitem-custom-card{
-  background-color: #90edbd;
+  background-color: #16ac23;
   font-family: 'Anek Malayalam', sans-serif;
-  /* display: flex;
-  flex-direction: column; */
+  font-size: larger;
+  color: rgb(252, 251, 251);
   border-radius: 5px;
   padding: 1%;
   width: 400px;
@@ -52,8 +56,18 @@
   margin: 10px;
 }
 
+nav{
+  background-color: #192641;
+  font-family: 'Anek Malayalam', sans-serif;
+}
+
+.container{
+  /* width: 75vw; */
+}
 body{
-  background-color: #f9fcf8;
+  background-color: #192641;
+  color: azure;
+  font-family: 'Anek Malayalam', sans-serif;
 }
 
 .title-and-buttons{

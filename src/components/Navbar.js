@@ -1,7 +1,6 @@
 import React, { useEffect, useContext } from 'react'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import authContext from '../context/auth/authContext'
-import noteContext from '../context/note/noteContext'
 
 const Navbar = () => {
   const location = useLocation()
@@ -23,9 +22,9 @@ const Navbar = () => {
 
   return (
     <>
-      <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+      <nav className="navbar navbar-expand-lg navbar-dark" >
         <div className="container-fluid">
-          <Link className="navbar-brand" to="">Notebook</Link>
+          <Link className="navbar-brand" to={localStorage.getItem("token")?"/user":"/" }>Notebook</Link>
           <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span className="navbar-toggler-icon"></span>
           </button>
@@ -54,7 +53,7 @@ const Navbar = () => {
               <ul className='navbar-nav'>
                 <li className='nav-item' style={{ color: "white" }}>New User?
                   <Link to="/signup">
-                    <button className='btn-primary btn mx-2'> Signup </button>
+                    <button className='btn-info btn mx-2'> Signup </button>
                   </Link>
                 </li>
               </ul>
@@ -64,7 +63,7 @@ const Navbar = () => {
               <div>
                 <ul className="navbar-nav">
                   <li className="nav-item">
-                    <button className='btn-primary btn' onClick={handleClick}>Signout</button>
+                    <button className='btn-info btn' onClick={handleClick}>Signout</button>
                   </li>
                 </ul>
               </div>
