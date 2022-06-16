@@ -8,6 +8,7 @@ const Note = () => {
   const note_Context = useContext(noteContext)
   const { note, fetchAllNotes, editNote } = note_Context
   const [notes, setNotes] = useState({id: "", title: "", description: "", tag: "" })
+  const [addNote, setaddNote] = useState(false)
   const ref = useRef(null)
   const closeRef = useRef(null)
   const navigate = useNavigate()
@@ -38,9 +39,24 @@ const Note = () => {
     setNotes({ ...notes, [e.target.name]: e.target.value })
   }
 
+  const handleAddNote = () => {
+    const addNoteRevealer = document.getElementById('addNote-revealer')
+    if(addNoteRevealer.classList.contains("fa-file-circle-plus")){
+      addNoteRevealer.classList.remove("fa-file-circle-plus")
+      addNoteRevealer.classList.add("fa-circle-arrow-up")
+      setTimeout(() => {setaddNote(true)}, 100)
+    }
+
+    else if(addNoteRevealer.classList.contains("fa-circle-arrow-up")){
+      addNoteRevealer.classList.remove("fa-circle-arrow-up")
+      addNoteRevealer.classList.add("fa-file-circle-plus")
+      setTimeout(() => {setaddNote(false)}, 100)
+    }
+  }
+
   return (
     <>
-      <AddNote />
+      {addNote && <AddNote />}
       {/* <!-- Button trigger modal --> */}
       <button ref={ref} type="button" className="btn btn-primary d-none" data-bs-toggle="modal" data-bs-target="#exampleModal">
         Launch demo modal
@@ -65,7 +81,7 @@ const Note = () => {
                 </div>
                 <div className="mb-3">
                   <label htmlFor="edescription" className="form-label">Description</label>
-                  <input type="text" className="form-control" name="description" id="edescription" value={notes.description} onChange={onChange} />
+                  <textarea type="text" className="form-control" name="description" id="edescription" value={notes.description} onChange={onChange} />
                 </div>
                 <div className="mb-3">
                   <label htmlFor="etag" className="form-label">Tag</label>
@@ -83,9 +99,12 @@ const Note = () => {
       </div>
 
       {/* Notes are here */}
-      <h2 className='my-3'>Your notes</h2>
       <div className="container-custom">
-        <div className="content-cutom">
+      <h2 className='my-3' style={{display: "flex",justifyContent: "space-between"}}>
+        Notes
+        <i class="fa-solid fa-file-circle-plus" id="addNote-revealer" onClick={handleAddNote}></i>
+        </h2>
+        <div className="content-custom">
           {note.map((note) => {
             return <NoteItems key={note._id} updateNote={updateNote} note={note} />
           })}

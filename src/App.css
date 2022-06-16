@@ -36,17 +36,24 @@
 
 .content-custom{
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
 }
 
 .noteitem-custom-card{
-  display: flex;
-  flex-direction: column;
-  border: 1px solid rgb(147, 146, 146);
-  border-radius: 10px;
+  background-color: #90edbd;
+  font-family: 'Anek Malayalam', sans-serif;
+  /* display: flex;
+  flex-direction: column; */
+  border-radius: 5px;
   padding: 1%;
-  width: 70vw;
-  margin: 1%;
+  width: 400px;
+  min-height: 300px;
+  margin: 10px;
+}
+
+body{
+  background-color: #f9fcf8;
 }
 
 .title-and-buttons{
