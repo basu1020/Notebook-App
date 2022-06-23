@@ -34,6 +34,15 @@
   justify-content: center;
 }
 
+.container-custom-login{
+  width: 500px;
+  height: 75vh;
+  margin: auto;
+  background-color: #2f3749;
+  padding: 2%;
+  border-radius: 10px;
+}
+
 .content-custom{
   display: flex;
   flex-wrap: wrap;
@@ -61,9 +70,11 @@ nav{
   font-family: 'Anek Malayalam', sans-serif;
 }
 
-.container{
-  /* width: 75vw; */
+input{
+  background-color: #282c34;
+  color: white;
 }
+
 body{
   background-color: #192641;
   color: azure;

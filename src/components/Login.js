@@ -41,24 +41,26 @@ const Login = () => {
 
     return (
         <>
-            <div className='container my-3'>
-                <h3> Login </h3>
-                <form>
-                    <div className="row mb-3">
+        <div className="container-custom-login">
+            <div className='container-custom my-3'>
+                <h3 style={{display:"flex",justifyContent:"center"}}> Login </h3>
+                <form className='my-2'>
+                    <div className="row mb-3 my-4">
                         <label htmlFor="inputEmail3" className="col-sm-2 col-form-label"> Email </label>
                         <div className="col-sm-10">
-                            <input type="email" className="form-control" name="email" value={loginQuery.email} id="inputEmail" onChange={onChange}/>
+                            <input type="email" className="form-control" name="email" value={loginQuery.email} id="inputEmail" onChange={onChange} style={{backgroundColor: ""}}/>
                         </div>
                     </div>
-                    <div className="row mb-3">
+                    <div className="row mb-3 my-2">
                         <label htmlFor="inputPassword3" className="col-sm-2 col-form-label"> Password </label>
                         <div className="col-sm-10">
                             <input type="password" className="form-control" name="password" value={loginQuery.password} id="inputPassword" onChange={onChange}/>
                         </div>
                     </div>
-                    <button className="btn btn-primary" onClick={handleClick}> Log in </button>
+                    <button className="btn btn-primary" onClick={handleClick}>Log in</button>
                 </form>
             </div>
+        </div>
         </>
     )
 }
