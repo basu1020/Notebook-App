@@ -6,10 +6,7 @@ const NoteState = (props) => {
     const intitalState = []
     const [note, setNote] = useState(intitalState)
 
-    const fetchAllNotes = async () => {
-
-
-        //TODO API CALL
+    const fetchAllNotes = async () => {     //TODO API CALL
         const response = await fetch(`${host}/api/notes/fetchAllNotes`, {
             method: 'GET',
             headers: {
@@ -22,9 +19,7 @@ const NoteState = (props) => {
     }
 
     // Add a Note
-
-    const addNote = async (title, description, tag) => {
-        //TODO API CALL
+    const addNote = async (title, description, tag) => {  //TODO API CALL
         const Tag = tag ? tag : null
         const response = await fetch(`${host}/api/notes/addNote`, {
             method: 'POST',
@@ -52,10 +47,7 @@ const NoteState = (props) => {
         setNote(newNote)
     }
 
-    //
-    const editNote = async (id, title, description, tag) => {
-
-        // API Call
+    const editNote = async (id, title, description, tag) => {  // API Call
         const response = await fetch(`${host}/api/notes/updateNote/${id}`, {
             method: 'PUT',
             headers: {
@@ -65,9 +57,8 @@ const NoteState = (props) => {
             body: JSON.stringify({ title, description, tag })
         })
         const json = response.json()
-
+        
         // Logic to show changes to client.
-
         let newNote = JSON.parse(JSON.stringify(note))
         for (let index = 0; index < newNote.length; index++) {
             const element = newNote[index];

@@ -1,12 +1,9 @@
 import AuthContext from "./authContext";
-import { useContext, useState } from "react";
-import noteContext from "../note/noteContext";
+import { useState } from "react";
 
 const AuthState = (props) => {
     const host = 'http://localhost:5000'
     const [loggedIN, setLoggedIN] = useState(false)
-    const context = useContext(noteContext)
-    const { setauthToken } = context
 
     const login = async (email, passowrd) => {
 
@@ -39,7 +36,6 @@ const AuthState = (props) => {
             {props.children}
         </AuthContext.Provider>
     )
-    
 }
 
 export default AuthState
