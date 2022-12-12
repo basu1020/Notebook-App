@@ -51,7 +51,7 @@ const Navbar = () => {
 
             {!localStorage.getItem("token") &&
               <ul className='navbar-nav'>
-                <li className='nav-item' style={{ color: "white" }}>New User?
+                <li className='nav-item' style={{ color: "white" }}>First time here?
                   <Link to="/signup">
                     <button className='btn-info btn mx-2'> Signup </button>
                   </Link>

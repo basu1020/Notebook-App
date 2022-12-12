@@ -7,17 +7,17 @@ import AddNote from './AddNote'
 const Note = () => {
   const note_Context = useContext(noteContext)
   const { note, fetchAllNotes, editNote } = note_Context
-  const [notes, setNotes] = useState({id: "", title: "", description: "", tag: "" })
+  const [notes, setNotes] = useState({ id: "", title: "", description: "", tag: "" })
   const [addNote, setaddNote] = useState(false)
   const ref = useRef(null)
   const closeRef = useRef(null)
   const navigate = useNavigate()
 
   useEffect(() => {
-    if(localStorage.getItem("token")){
+    if (localStorage.getItem("token")) {
       fetchAllNotes()
     }
-    else{
+    else {
       navigate("/")
     }
     // eslint-disable-next-line
@@ -27,10 +27,9 @@ const Note = () => {
   const updateNote = async (currentNote) => {
     await ref.current.click()
     setNotes(currentNote)
-
   }
 
-  const handleClick = async () => {   
+  const handleClick = async () => {
     await editNote(notes._id, notes.title, notes.description, notes.tag)
     closeRef.current.click()
   }
@@ -41,16 +40,16 @@ const Note = () => {
 
   const handleAddNote = () => {
     const addNoteRevealer = document.getElementById('addNote-revealer')
-    if(addNoteRevealer.classList.contains("fa-file-circle-plus")){
+    if (addNoteRevealer.classList.contains("fa-file-circle-plus")) {
       addNoteRevealer.classList.remove("fa-file-circle-plus")
       addNoteRevealer.classList.add("fa-circle-arrow-up")
-      setTimeout(() => {setaddNote(true)}, 100)
+      setTimeout(() => { setaddNote(true) }, 100)
     }
 
-    else if(addNoteRevealer.classList.contains("fa-circle-arrow-up")){
+    else if (addNoteRevealer.classList.contains("fa-circle-arrow-up")) {
       addNoteRevealer.classList.remove("fa-circle-arrow-up")
       addNoteRevealer.classList.add("fa-file-circle-plus")
-      setTimeout(() => {setaddNote(false)}, 100)
+      setTimeout(() => { setaddNote(false) }, 100)
     }
   }
 
@@ -100,9 +99,9 @@ const Note = () => {
 
       {/* Notes are here */}
       <div className="container-custom">
-      <h2 className='my-3' style={{display: "flex",justifyContent: "space-between"}}>
-        Notes
-        <i className="fa-solid fa-file-circle-plus" id="addNote-revealer" onClick={handleAddNote}></i>
+        <h2 className='my-3' style={{ display: "flex", justifyContent: "space-between" }}>
+          Notes
+          <i className="fa-solid fa-file-circle-plus" id="addNote-revealer" onClick={handleAddNote}></i>
         </h2>
         <div className="content-custom">
           {note.map((note) => {
