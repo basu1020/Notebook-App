@@ -105,7 +105,7 @@ const Note = () => {
         </h2>
         <div className="content-custom">
           {note.map((note) => {
-            return <NoteItems key={note._id} updateNote={updateNote} note={note} />
+            return <NoteItems key={note._id} id={note._id} updateNote={updateNote} note={note} />
           })}
         </div>
       </div>
