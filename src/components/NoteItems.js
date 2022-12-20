@@ -16,7 +16,7 @@ const NoteItems = (props) => {
     const onChangeDoThis = (e) => {
         // console.log(e.target.value)
         console.log(note)
-        console.log(e.target.value)
+        
     }
 
     return (

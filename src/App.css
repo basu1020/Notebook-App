@@ -78,7 +78,15 @@ input{
 body{
   background-color: #192641;
   color: azure;
-  font-family: 'Anek Malayalam', sans-serif;
+  font-family: 'Paytone One', sans-serif;
+}
+
+nav{
+  font-family: 'Paytone One', sans-serif;
+}
+
+.noteitem-custom-card{
+  font-family: 'Paytone One', sans-serif;
 }
 
 .title-and-buttons{
