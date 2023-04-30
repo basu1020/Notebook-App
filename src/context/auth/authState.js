@@ -23,7 +23,8 @@ const AuthState = (props) => {
         const response = await fetch(`${host}/api/auth/createUser`,{
             method: "POST",
             headers: {
-                'Content-type': 'application/json'
+                'Content-type': 'application/json',
+                'Access-Control-Allow-Origin': '*'
             },
             body: JSON.stringify({"name": name, "email":email, "password":password})
         })

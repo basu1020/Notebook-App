@@ -1,13 +1,13 @@
 require("dotenv").config()
 const connectToMongo = require("./db")
-connectToMongo()
+// connectToMongo()
 const express = require('express')
 const app = express()
 const port = process.env.PORT || 5000
 const cors = require('cors')
 
 app.use(cors())
-app.use(express.json()) 
+app.use(express.json())
 
 app.get('/', (req, res) => {
   res.json({ greeting: 'Welcome to my API!' })
@@ -16,7 +16,11 @@ app.get('/', (req, res) => {
 app.use('/api/auth', require('./routes/auth'))
 app.use('/api/notes', require('./routes/notes'))
 
-app.listen(port, () => {
-  console.log(`Example app listening on port http://localhost:${port}`) 
-})  
+
+connectToMongo().then(() => {
+  app.listen(port, () => {
+    console.log(`Example app listening on port http://localhost:${port}`)
+  })
+})
+
 
