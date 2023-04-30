@@ -2,7 +2,7 @@ import AuthContext from "./authContext";
 import { useState } from "react";
 
 const AuthState = (props) => {
-    const host = 'https://red-determined-harp-seal.cyclic.app'
+    const host = 'https://dull-tan-sockeye.cyclic.app'
     const [loggedIN, setLoggedIN] = useState(false)
 
     const login = async (email, passowrd) => {
