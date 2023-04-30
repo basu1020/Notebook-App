@@ -16,10 +16,11 @@ app.get('/', (req, res) => {
 app.use('/api/auth', require('./routes/auth'))
 app.use('/api/notes', require('./routes/notes'))
 
-
 connectToMongo().then(() => {
   app.listen(port, () => {
     console.log(`Example app listening on port http://localhost:${port}`)
+  }).catch((err) => {
+    console.log("Failed to connect to MongoDb:", err)
   })
 })
 
